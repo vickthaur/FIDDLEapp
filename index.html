@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Programme Fidélité</title>
+    
+    <script src="app.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --primary: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0d12; color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        
+        .hub-container { background: rgba(30, 34, 43, 0.7); backdrop-filter: blur(15px); width: 100%; max-width: 500px; border-radius: 30px; padding: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .nom-resto { font-size: 14px; text-transform: uppercase; letter-spacing: 4px; color: var(--primary); margin-bottom: 20px; font-weight: 800; }
+        
+        /* Style de l'Iframe du formulaire */
+        iframe { width: 100%; height: 600px; border: none; border-radius: 20px; background: transparent; }
+
+        /* Vue Merci (cachée au début) */
+        #merci-view { display: none; padding: 40px 20px; }
+        .icon-merci { font-size: 60px; margin-bottom: 20px; }
+    </style>
+</head>
+
+<body onload="App.appliquerDesign()"> <div class="hub-container">
+        <div class="nom-resto">Chargement...</div>
+
+        <div id="inscription-view">
+            <h1 style="font-size: 24px; margin-bottom: 10px;">Rejoignez-nous !</h1>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Inscrivez-vous pour commencer à cumuler des points.</p>
+            
+            <script>
+                document.write(`<iframe src="${App.getParams().data.formInscription}" id="form-brevo"></iframe>`);
+            </script>
+        </div>
+
+        <div id="merci-view">
+            <div class="icon-merci">🎉</div>
+            <h1 style="font-size: 28px; margin-bottom: 15px;">Félicitations !</h1>
+            <p style="color: #cbd5e1; line-height: 1.6;">
+                Votre inscription est validée.<br>
+                <strong>Vérifiez vos emails</strong> pour recevoir votre carte de fidélité magique.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Détection de la soumission du formulaire Brevo pour passer à la vue "Merci"
+        const iframe = document.getElementById('form-brevo');
+        iframe.onload = function() {
+            // Si l'iframe recharge (souvent signe de validation), on pourrait switcher la vue
+            // Note : Brevo redirige souvent, on peut aussi utiliser un timer ou laisser Brevo gérer sa propre page merci.
+        };
+    </script>
+
+</body>
+</html>
